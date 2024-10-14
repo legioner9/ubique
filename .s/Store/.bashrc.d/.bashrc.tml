@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# read -p "see IFS"
+
+idir_42434515=$(pwd)
+
+if [ -f ~/.bash_aliases ]; then
+
+    . ~/.bash_aliases
+
+fi
+
+# IIFS=$' \t\n'
+
+# touch ~/.stabit
+# _sta0() { : >~/.stabit; }
+# _sta1() { echo A >~/.stabit; }
+# _stae() { cat ~/.stabit; }
+
+# echo 0
+
+# if [ -f ~/.enterrc ]; then . ~/.enterrc >/dev/null; fi
+# if [[ -f ~/.d/.rc.d/.st.rc.d/.st.rc ]]; then . ~/.d/.rc.d/.st.rc.d/.st.rc >/dev/null; fi
+unset IFS
+#* IFS=$' \t\n'
+
+if [ -f ~/.is_bashrc_log ]; then
+
+    is_bashrc_log=$(cat ~/.is_bashrc_log)
+
+    if [ 0 -ne ${is_bashrc_log} ] && [ 1 -ne ${is_bashrc_log} ]; then
+        echo " ~/.is_bashrc_log EXIST and NOT_CONTANE '1' or '0' " >&2
+    fi
+
+else
+
+    echo 0 >~/.is_bashrc_log
+    is_bashrc_log=0
+
+fi
+
+if [ 1 -eq ${is_bashrc_log} ]; then
+
+    : >~/.bashrc.log
+
+    if [[ -f ~/.d/.rc.d/.st.rc.d/.st.rc ]]; then if ! . ~/.d/.rc.d/.st.rc.d/.st.rc &>~/.bashrc.log; then
+        # if [[ -f ~/.d/.rc.d/.st.rc.d/.st.rc ]]; then if ! . ~/.d/.rc.d/.st.rc.d/.st.rc >/dev/null; then
+        echo "in ~/.bashrc : FAIL . ~/.d/.rc.d/.st.rc.d/.st.rc : return 1" >&2
+        return 1
+    fi; fi
+
+fi
+
+if [ 0 -eq ${is_bashrc_log} ]; then
+
+    # if [[ -f ~/.d/.rc.d/.st.rc.d/.st.rc ]]; then if ! . ~/.d/.rc.d/.st.rc.d/.st.rc &>~/tmp/.bashrc.log; then
+    if [[ -f ~/.d/.rc.d/.st.rc.d/.st.rc ]]; then if ! . ~/.d/.rc.d/.st.rc.d/.st.rc >/dev/null; then
+        echo "in ~/.bashrc : FAIL . ~/.d/.rc.d/.st.rc.d/.st.rc : return 1" >&2
+        return 1
+    fi; fi
+
+fi
+
+# if [[ -f ~/.d/.rc.d/.st.rc.d/.st.rc ]]; then if ! . ~/.d/.rc.d/.st.rc.d/.st.rc ; then echo "in ~/.bashrc : FAIL . ~/.d/.rc.d/.st.rc.d/.st.rc : return 1" >&2;return 1;fi fi
+# echo 10
+# return 1
+
+# echo x
+
+unset IFS
+
+cd "${idir_42434515}" || echo "FAIL_EXEC: cd ${idir_42434515}"
