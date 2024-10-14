@@ -1,0 +1,142 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"plt_exit NOT_FILE": {
+		"prefix": "plt_not_file",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : NOT_FILE : '${1:path_file}' : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit NOT_FILE"
+	},
+
+	"plt_exit NOT_DIR": {
+		"prefix": "plt_not_dir",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : NOT_DIR : '${1:path_dir}' : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit NOT_DIR"
+	},
+
+	"plt_exit NOT_NODE": {
+		"prefix": "plt_not_node",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : NOT_NODE(file or dir) : '${1:path_node}' : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit NOT_NODE"
+	},
+
+	"plt_exit EXEC_FAIL": {
+		"prefix": "plt_exec_fail",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : EXEC_FAIL : '${1:EXEC_EXPERSION}' : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit EXEC_FAIL"
+	},
+
+	"plt_exit EXEC_TRUE": {
+		"prefix": "plt_exec_true",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : EXEC_TRUE : '${1:EXEC_EXPERSION}' : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit EXEC_TRUE"
+	},
+	
+	"plt_exit ERR_AMOUNT_ARGS": {
+		"prefix": "plt_err_amount_args",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : ERR_AMOUNT_ARGS : '\${NARGS}=\\${NARGS}' demand: ${1:demand_amount_args} : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit ERR_AMOUNT_ARGS"
+	},
+
+	"plt_exit NOT_IN_CONDITION": {
+		"prefix": "plt_not_condition",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : NOT_IN_CONDITION : '${1:THIS}' : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit NOT_IN_CONDITION"
+	},
+
+	"plt_exit NOT_DEFINE": {
+		"prefix": "plt_not_define",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : NOT_DEFINE : '${1:THIS}' : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit NOT_DEFINE"
+	},
+
+	"plt_exit DO?": {
+		"prefix": "plt_do?",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : DO? : '${1:THIS}' : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit DO?"
+	},
+
+	"plt_exit NOT_NUMBER": {
+		"prefix": "plt_not_number",
+		"body": [
+
+			"plt_exit \"in \\${FNN} : NOT_NUMBER : '${1:THIS}' : return 1\""
+			"return 1"
+
+		],
+		"description": "plt_exit NOT_NUMBER"
+	},
+
+
+
+
+"plt_exit NOT_ARG_IN_FROM": {
+	"prefix": "plt_arg_in_from",
+	"body": [
+		"if isn_from__ \\${NARGS} ${1:less} ${2:more} \"in \\${FNN}() : ERR_AMOUNT_ARGS entered :'\\${NARGS}' args : return 1\"; then"
+		"return 1"
+		"fi"
+	],
+	"description": "plt_exit NOT_ARG_IN_FROM"
+},
+	
+}

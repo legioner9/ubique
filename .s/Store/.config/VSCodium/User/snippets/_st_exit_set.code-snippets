@@ -1,0 +1,183 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"_st_exit NOT_FILE": {
+		"prefix": "_st_not_file",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : NOT_FILE (\\\\\\$) : 'file://${1:path_file}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit NOT_FILE"
+	},
+
+	"_st_exit NOT_DIR": {
+		"prefix": "_st_not_dir",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : NOT_DIR (\\\\\\$) : 'file://${1:path_dir}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit NOT_DIR"
+	},
+
+	"_st_exit NOT_NODE": {
+		"prefix": "_st_not_node",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : NOT_NODE(file or dir) (\\\\\\$) : 'file://${1:path_node}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit NOT_NODE"
+	},
+
+	"_st_exit EXEC_FAIL": {
+		"prefix": "_st_exec_fail",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : : EXEC_FAIL : '${1:EXEC_EXPERSION}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit EXEC_FAIL"
+	},
+
+	"_st_exit EXEC_TRUE": {
+		"prefix": "_st_exec_true",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : : EXEC_TRUE : '${1:EXEC_EXPERSION}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit EXEC_TRUE"
+	},
+	
+	"_st_exit ERR_AMOUNT_ARGS": {
+		"prefix": "_st_err_amount_args",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : ERR_AMOUNT_ARGS : '\\${NARGS}=\\${NARGS}' demand: ${1:demand_amount_args} : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit ERR_AMOUNT_ARGS"
+	},
+
+	"_st_exit NOT_IN_CONDITION": {
+		"prefix": "_st_not_condition",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : : NOT_IN_CONDITION (\\\\\\$) : '${1:THIS}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit NOT_IN_CONDITION"
+	},
+
+	"_st_exit NOT_DEFINE": {
+		"prefix": "_st_not_define",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : NOT_DEFINE (\\\\\\$) : '${1:THIS}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit NOT_DEFINE"
+	},
+
+	"_st_exit DO?": {
+		"prefix": "_st_do?",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"iin fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* :: DO? : '${1:THIS}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit DO?"
+	},
+
+	"_st_exit NOT_NUMBER": {
+		"prefix": "_st_not_number",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : NOT_NUMBER (\\\\\\$) : '${1:THIS}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit NOT_NUMBER"
+	},
+
+	"_st_exit NOT_AVAILABLE": {
+		"prefix": "_st_not_avalable",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : NOT_AVAILABLE (\\\\\\$) : '${1:THIS}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit NOT_AVAILABLE"
+	},
+
+	"_st_exit CONFLICT_NAME": {
+		"prefix": "_st_confilct_name",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"_st_exit \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : CONFLICT_NAME (\\\\\\$) : ARGS${1:X} not be equal '${2:THIS}' : \\${hint} : return 1\"",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1"
+
+		],
+		"description": "_st_exit CONFLICT_NAME"
+	},
+
+	"_st_exit NOT_ARG_IN_FROM": {
+		"prefix": "_st_arg_in_from",
+		"body": [
+			"hint=\"hint -> \\\\\\$1: \\\\\\$2: \"",
+			"if _isn_from \\${NARGS} ${1:less} ${2:more} \"in fs= file:// , line=\\${LINENO}, EXEC: \\${FNN} \\$* : ERR_AMOUNT_ARGS entered :'\\${NARGS}' args : \\${hint} : return 1\"; then",
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2", 
+			"return 1",
+			"fi"
+		],
+		"description": "_st_exit NOT_ARG_IN_FROM"
+	},
+
+	"_st_cd_PWD": {
+		"prefix": "_st_cd_PWD",
+		"body": [
+			"cd \"\\$PPWD\" || echo \"EXEC_FAIL : 'cd \\$PPWD' :: return 0|1\" >&2"
+		],
+		"description": "_st_cd_PWD"
+	},
+
+}
