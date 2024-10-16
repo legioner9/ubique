@@ -1,0 +1,232 @@
+#!/bin/bash
+
+# if [[ -s ~/.stabit ]]; then
+#     if [[ -f ~/.starc ]]; then
+
+#         . ~/.starc
+#         return 0
+#     else
+#         echo "~/.stabit true, EXEC_FAIL :: . ~/.starc :: return 1" >&2
+#         return 1
+#     fi
+# fi
+
+# echo "start .bashrc"echo -e "${HLIGHT}---$HOME/.bashrc---${NORMAL}" #start files
+
+echo -e "${RED}--- Hardcor fonsh_path plt_path repo_path---${NORMAL}" #exit 1
+
+echo "${HOME}/REPOBARE/_repo/fonsh" >~/.fonsh_path
+echo "${HOME}/REPOBARE/_repo/plt" >~/.plt_path
+echo "${HOME}/REPOBARE/_repo" >~/.repo_path
+
+if ! [ -f ~/.w ]; then
+    touch ~/.w
+fi
+
+unset PD_PATH
+
+if ! [ -f ~/.pd_path ]; then
+    touch ~/.pd_path
+fi
+
+if [ -f ~/.pd_path ]; then
+    PD_PATH=$(cat ~/.pd_path)
+fi
+
+if [ -z "${PD_PATH}" ]; then
+    echo "PD_PATH not avalable" >&2
+    return 1
+fi
+
+unset PD_READ
+
+if ! [ -f ~/.pd_read ]; then
+    touch ~/.pd_read
+fi
+
+if [ -f ~/.pd_read ]; then
+    PD_READ=$(cat ~/.pd_read)
+fi
+
+if [ -z "${PD_READ}" ]; then
+    echo "PD_READ not avalable" >&2
+    return 1
+fi
+
+unset FONSH_PATH
+
+if [ -f ~/.fonsh_path ]; then
+    FONSH_PATH=$(cat ~/.fonsh_path)
+fi
+
+if [ -z "${FONSH_PATH}" ] || ! [ "$(basename $FONSH_PATH)" == "fonsh" ]; then
+    echo "FONSH_PATH not avalable" >&2
+    return 1
+fi
+
+unset PLT_PATH
+
+if [ -f ~/.plt_path ]; then
+    PLT_PATH=$(cat ~/.plt_path)
+fi
+
+if [ -z "${PLT_PATH}" ] || ! [ "$(basename $PLT_PATH)" == "plt" ]; then
+    echo "PLT_PATH not avalable" >&2
+    return 1
+fi
+
+unset REPO_PATH
+
+if [ -f ~/.repo_path ]; then
+    REPO_PATH=$(cat ~/.repo_path)
+fi
+
+if [ -z "${REPO_PATH}" ] || ! [ "$(basename $REPO_PATH)" == "_repo" ]; then
+    echo "REPO_PATH not avalable" >&2
+    return 1
+fi
+
+c_up() {
+    echo -e "${CYAN}---c_up() \$1 = $1---${NORMAL}" #started functions
+    IFS=$' \t\n'
+
+    # cd_h "$1" "$filename" "$LINENO"
+    if [[ -d "$1" ]]; then
+        cd "$1"
+    else
+        echo "$1 is not dir" >&2
+        return 1
+    fi
+
+    local dir
+    dir=$(pwd)
+
+    for item in *; do
+
+        local item_path=$dir/$item
+
+        if [ -f "$item_path" ] && [ "${item:0:1}" != "_" ] && [ "${item##*.}" = sh ]; then
+            . "$item_path"
+
+        elif
+            [ -d "$item_path" ] && [ "${item:0:1}" != "_" ]
+        then
+
+            c_up "$item_path"
+
+        fi
+
+    done
+}
+
+arb_up() { # $1 arb_dir arb/ram_name.ram/.grot/ram_name.sh
+
+    local arg0="$1"
+
+    if [[ -d "${arg0}" ]]; then
+        cd "${arg0}"
+    else
+        echo "${arg0} is not dir" >&2
+        return 1
+    fi
+
+    for item in $(ls "${arg0}"); do
+        # echo -e "${GREEN}\$item = $item${NORMAL}" #print variable
+        item_path=${arg0}/${item}
+        if [ -d "$item_path" ] && [ "${item:0:1}" != "_" ]; then
+
+            name_item="${item%.*}"
+            local up_name="${arg0}"/$item/.grot/${name_item}.sh
+            if [ -f ${up_name} ]; then
+                # echo -e "${CYAN}--- . ${up_name} ---${NORMAL}" #sistem info mesage
+                . "${up_name}"
+            else
+                echo "in arb_up() : NOT_FILE : file://${up_name}" >&2
+            fi
+
+        fi
+    done
+
+}
+
+export arb_up
+
+rr() {
+    echo -e "${CYAN}--- rr() ---${NORMAL}" #started functions
+
+    echo -e "${ULINE} exec file://$HOME/.bashrc ${NORMAL}" #repit commands
+    exec "$HOME/.bashrc"
+}
+
+export rr
+
+if [ -f "${PLT_PATH}"/.pltrc ]; then . "${PLT_PATH}"/.pltrc; fi
+if [ -f "${FONSH_PATH}"/.fonshrc ]; then . "${FONSH_PATH}"/.fonshrc; fi
+
+# IIFS=$IFS
+
+PPWD="$(pwd)"
+
+if ! [[ -d "${COMMUNIS_PATH}" ]]; then
+    read -p "\${COMMUNIS_PATH} = ${COMMUNIS_PATH} is not dir, be return 1 - for interrupt ^C" >&2
+    return 1
+fi
+
+eval "$(ssh-agent -s)"
+
+export IIFS
+
+export MANOPT="-L ru"
+
+# . "${COMMUNIS_PATH}/Deploy_store/.os/.sh/git-prompt.sh"
+# . "${PLT_PATH}"/.d/.sh/.bashrc/git-prompt.sh
+
+c_up "${PLT_PATH}"/.d/.sh/.bashrc
+c_up "${PLT_PATH}"/.d/.sh/lu
+
+# REPOBARE/_repo/communis/Deploy_store/.qa
+
+# export GIT_PS1_SHOWDIRTYSTATE=1
+# export PS1='\033[35;40m\u@\H \w$(__git_ps1 " (%s)")\$\033[0m '
+IFS=$' \t\n'
+
+# if command -v _str_lib_lst; then
+#     arr_lib=($(_str_lib_lst))
+#     export PS1='\033[0;32m${arr_lib[*]} \033[0;35m\u@\H \w$(__git_ps1 " (%s)") \$\033[0m '
+# fi
+
+if [ -f ~/.bash_aliases ]; then
+
+    . ~/.bash_aliases
+
+fi
+
+. "${PLT_PATH}/.d/.sh/lu/user/0_ini.sh"
+
+c_up "${COMMUNIS_PATH}"/Deploy_store/.qa
+c_up "${COMMUNIS_PATH}"/Deploy_store/.os/
+c_up "${COMMUNIS_PATH}"/Deploy_store/.os/.sh/
+c_up "${COMMUNIS_PATH}"/Deploy_store/
+
+arb_up ${PLT_PATH}/.d/.arb/bsh.arb
+
+# c_up "${PLT_PATH}"/.d/.sh/.bashrc
+
+add_PATH_
+
+cd "$PPWD" || {
+    read -p "DOFAIL: cd $PPWD :: return 1"
+    return 1
+}
+
+#######
+# . "$HOME/.cargo/env"
+___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"
+if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
+
+if ! w_declare__; then
+    plt_exit "in fs=file://${HOME}/.enterrc , line=${LINENO} : : EXEC_FAIL : 'w_declare__' see file://${HOME}/.w : return 1"
+    return 1
+fi
+IFS=$' \t\n'
+# XXX
