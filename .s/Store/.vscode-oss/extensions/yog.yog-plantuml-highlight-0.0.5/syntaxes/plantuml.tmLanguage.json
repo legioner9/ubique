@@ -1,0 +1,367 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "PlantUML",
+	"patterns": [
+		{
+			"name": "comment.line.double-slash.plantuml",
+			"match": "^\\s*'.*$",
+			"comment": "１行コメント"
+		},
+		{
+			"name": "comment.block.plantuml",
+			"begin": "^\\s*/'",
+			"end": "'/",
+			"comment": "ブロックコメント"
+		},
+		{
+			"name": "string.quoted.double.plantuml",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.plantuml",
+					"match": "\\\\."
+				}
+			],
+			"comment": "文字列"
+		},
+		{
+			"name": "constant.language",
+			"match": "#[0-9a-fA-F]{6}\\b",
+			"comment": "RGB"
+		},
+		{
+			"name": "constant.language",
+			"match": "(#)?(?i:(LightGoldenRodYellow|MediumSpringGreen|MediumAquaMarine|MediumSlateBlue|MediumTurquoise|MediumVioletRed|BlanchedAlmond|LightSlateGray|LightSteelBlue|DarkOliveGreen|MediumSeaGreen|PaleGoldenRod|PaleTurquoise|PaleVioletRed|LavenderBlush|CornﬂowerBlue|DarkGoldenRod|LightSeaGreen|DarkSlateBlue|DarkSlateGray|DarkTurquoise|AntiqueWhite|LightSkyBlue|DarkSeaGreen|MediumOrchid|MediumPurple|MidnightBlue|NavajoWhite|GreenYellow|LemonChiﬀon|SaddleBrown|LightSalmon|DarkMagenta|LightYellow|SpringGreen|DeepSkyBlue|FloralWhite|ForestGreen|YellowGreen|GhostWhite|Aquamarine|BlueViolet|PapayaWhip|Chartreuse|LightCoral|PowderBlue|LightGreen|SandyBro wn|DarkOrchid|DarkSalmon|MediumBlue|DarkViolet|Darkorange|DodgerBlue|WhiteSmoke|AliceBlue|GoldenRod|OliveDrab|OrangeRed|IndianRed|PaleGreen|BurlyWood|CadetBlue|LawnGreen|Chocolate|LightBlue|LightCyan|RosyBrown|LightGrey|RoyalBlue|LightPink|DarkGreen|DarkKhaki|LimeGreen|SlateBlue|SlateGray|SteelBlue|Turquoise|FireBrick|MintCream|MistyRose|Gainsboro|HoneyDew|Lavender|PeachPuﬀ|Cornsilk|DarkBlue|DarkCyan|DarkGray|SeaGreen|SeaShell|DeepPink|Moccasin|OldLace|HotPink|Crimson|SkyBlue|DarkRed|Magenta|Thistle|DimGray|Fuchsia|Bisque|Orange|Orchid|Indigo|Purple|Salmon|Sienna|Silver|Maroon|Tomato|Violet|Yellow|Azure|Olive|Beige|Green|Black|Ivory|Brown|Khaki|Coral|Linen|Wheat|White|Navy|Gold|Aqua|Gray|Blue|Peru|Pink|Plum|Cyan|Lime|Snow|Teal|Red|Tan))\\b",
+			"comment": "カラーコード"
+		},
+		{
+			"name": "entity.name.type.plantuml",
+			"match": "(?i:(@startuml|@enduml)\\b)",
+			"comment": "開始と終了"
+		},
+		{
+			"name": "keyword.plantuml",
+			"match": "\\*-{1,2}>",
+			"comment": "矢印タイプ１（*-->）"
+		},
+		{
+			"name": "keyword.plantuml",
+			"match": "<-{1,2}\\*",
+			"comment": "矢印タイプ２（<--*）"
+		},
+		{
+			"name": "keyword.plantuml",
+			"match": "(?i:(\\[)?(x|o)?(/|\\\\|<)(\\[.*?\\])?+-{1,2}(\\[.*?\\])?(/|\\\\|>)+(x|o)?(\\])?)",
+			"comment": "矢印タイプ３（シーケンス図の両方矢印）"
+		},
+		{
+			"name": "keyword.plantuml",
+			"match": "(?i:(\\[)?(x|o)?(/|\\\\|<)+(\\[.*?\\])?-?(\\[.*?\\])?-(x|o)?(\\])?)",
+			"comment": "矢印タイプ４（シーケンス図の左向き）"
+		},
+		{
+			"name": "keyword.plantuml",
+			"match": "(?i:(\\[)?(x|o)?-(\\[.*?\\])?-?(\\[.*?\\])?(/|\\\\|>)+(x|o)?(\\])?)",
+			"comment": "矢印タイプ５（シーケンス図の右向き）"
+		},
+		{
+			"name": "keyword.plantuml",
+			"match": "(?i:(\\*|o|<|\\+|\\(\\))?(\\|)?-(le?f?t?|ri?g?h?t?|up?|do?w?n?)-(\\|)?(\\*|o|>|\\+|\\(\\))?)",
+			"comment": "矢印タイプ６（クラス図の方向指定タイプ）"
+		},
+		{
+			"name": "keyword.plantuml",
+			"match": "(?i:(\\*|o|<|\\+|\\(\\))?(\\|)?(\\.|-){1,2}(\\|)?(\\*|o|>|\\+|\\(\\))?)",
+			"comment": "矢印タイプ７（クラス図の汎用タイプ）"
+		},
+		{
+			"name": "meta",
+			"match": "[^\\s]+::",
+			"comment": "名前空間の区切り"
+		},
+		{
+			"name": "variable.plantuml",
+			"match": ":.*?:(\\s*)$",
+			"comment": "ユースケース図"
+		},
+		{
+			"match": "(?i:(:.*?:)\\s+(as)\\s+)",
+			"captures": {
+			"1": { "name": "variable.plantuml" },
+			"2": { "name": "keyword.control.plantuml" }
+			},
+			"comment": "ユースケース図"
+		},
+		{
+			"match": "(?i:(:.*?:)\\s+(-+(le?f?t?|ri?g?h?t?|up?|do?w?n?)-+>?))",
+			"comment": "ユースケース図",
+			"captures": {
+				"1": { "name": "variable.plantuml" },
+				"2": { "name": "keyword.plantuml" },
+				"3": { "name": "keyword.plantuml" }
+			}
+		},
+		{
+			"match": "(:.*?:)\\s+(-+>?)",
+			"comment": "ユースケース図",
+			"captures": {
+				"1": { "name": "variable.plantuml" },
+				"2": { "name": "keyword.plantuml" }
+			}
+		},
+		{
+			"name": "variable.plantuml",
+			"begin": "^\\s*?:",
+			"end": "(;|\\||\\>|\\<|\\]|}|/).*?$",
+			"comment": "アクティビティ図のラベル(ユースケースと構文がダブるので注意)"
+		},
+		{
+			"begin": "(?i:^\\s*?legend(\\s+(left|right|center))?\\b)",
+			"beginCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"end": "(?i:^\\s*?end\\s*?legend\\b)",
+			"endCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"contentName": "markup.bold.plantuml",
+			"comment": "ブロック Legend"
+		},
+		{
+			"begin": "(?i:^\\s*?title\\s*$)",
+			"beginCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"end": "(?i:^\\s*?end\\s*?title\\b)",
+			"endCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"contentName": "string.interpolated.plantuml",
+			"comment": "ブロックタイトル"
+		},
+		{
+			"begin": "(?i:^\\s*?((center|left|right)\\s+)?header\\s*$)",
+			"beginCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"end": "(?i:^\\s*?end\\s*?header\\b)",
+			"endCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"contentName": "string.interpolated.plantuml",
+			"comment": "ブロックヘッダ"
+		},
+		{
+			"begin": "(?i:^\\s*?((center|left|right)\\s+)?footer\\s*$)",
+			"beginCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"end": "(?i:^\\s*?end\\s*?footer\\b)",
+			"endCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"contentName": "string.interpolated.plantuml",
+			"comment": "ブロックフッター"
+		},
+		{
+			"match": "(?i:^\\s*?((h|r|floating\\s+)?note\\s+(left|right|over|on\\s+link)(\\s+of)?.*?)(:)(.*$)$)",
+			"captures": {
+			"1": { "name": "keyword.control.plantuml" },
+			"6": { "name": "markup.bold.plantuml" }
+			},
+			"comment": "1行note"
+		},
+		{
+			"begin": "(?i:^\\s*?((h|r|floating\\s+)?note\\s+(left|right|over|top|bottom|as)(\\s+on\\s+link)?(\\s+of)?)\\b)(.*$)",
+			"beginCaptures": {
+				"1": { "name": "keyword.control.plantuml" }
+			},
+			"end": "(?i:^\\s*?end\\s*(h|r)?note\\b)",
+			"endCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"contentName": "markup.bold.plantuml",
+			"comment": "ブロック Note"
+		},
+		{
+			"match": "(?i:^\\s*?(ref\\s+(over).*?)(:)(.*$)$)",
+			"captures": {
+			"1": { "name": "keyword.control.plantuml" },
+			"4": { "name": "markup.bold.plantuml" }
+			},
+			"comment": "1行ref"
+		},
+		{
+			"begin": "(?i:^\\s*?(ref\\s+(over))\\b)(.*$)",
+			"beginCaptures": {
+				"1": { "name": "keyword.control.plantuml" }
+			},
+			"end": "(?i:^\\s*?end\\s+ref\\b)",
+			"endCaptures": {
+				"0": { "name": "keyword.control.plantuml" }
+			},
+			"contentName": "markup.bold.plantuml",
+			"comment": "ブロック ref"
+		},
+		{
+			"match": "(?i:^\\s*(end\\s*while)((\\s*\\()(.*?)(\\)))?)",
+			"captures": {
+			"1": { "name": "keyword.control.plantuml" },
+			"3": { "name": "keyword.control.plantuml" },
+			"4": { "name": "string.interpolated.plantuml" },
+			"5": { "name": "keyword.control.plantuml" },
+			"6": { "name": "string.interpolated.plantuml" }
+			},
+			"comment": "end while"
+		},
+		{
+			"name": "keyword.control.plantuml",
+			"match": "(?i:\\b(as|create|control|class|static|abstract|interface|enum|annotation|hide|show|extends|package|scale|namespace))\\b",
+			"comment": "通常キーワード"
+		},
+		{
+			"name": "keyword.control.plantuml",
+			"match": "(?i:^\\s*(actor|boundary|control|entity|database|folder|participant|end(\\s+(fork|split|box|header|footer))?|autonumber(\\s+(stop|resume))?|activate|destroy|deactivate|hide(\\s+footbox)|box|set\\s+namespaceSeparator|together|start|stop|endif|repeat|fork(\\s+again)?|partition|component|node|cloud|frame|skinparam|state|object|detach|endfork|split(\\s+(again))?|usecase|note|top\\s+to\\s+bottom\\s+direction|left\\s+to\\s+right\\s+direction|sprite|rectangle)\\b)",
+			"comment": "開始系キーワード"
+		},
+		{
+			"match": "(?i:^\\s*(title|newpage|alt|opt|loop|par|break|critical|group|caption|((center|left|right)\\s+)?footer|((center|left|right)\\s+)?header)\\b(.*)$)",
+			"captures": {
+			"1": { "name": "keyword.control.plantuml" },
+			"2": { "name": "keyword.control.plantuml" },
+			"3": { "name": "keyword.control.plantuml" },
+			"4": { "name": "keyword.control.plantuml" },
+			"5": { "name": "keyword.control.plantuml" },
+			"6": { "name": "string.interpolated.plantuml" }
+			},
+			"comment": "後ろに文字列が入れられる系キーワード"
+		},
+		{
+			"match": "([^\\s][\\s]*):(.+)$",
+			"captures": {
+				"2" : {"name" : "string.interpolated.plantuml"}
+			},
+			"comment": "シーケンス図の："
+		},
+		{
+		"name": "variable.plantuml",
+		"match": "=+.*=+",
+		"comment": "シーケンス図の境界線(&アクティビティ図の区切り&クラス図の区切り)"
+		},
+		{
+			"name": "entity.name.tag.plantuml",
+			"match": "^\\s*\\.+.*\\.*",
+			"comment": "シーケンス図の遅延"
+		},
+		{
+			"name": "entity.name.tag.plantuml",
+			"match": "^\\s*\\|{3,}",
+			"comment": "シーケンス図の間隔その１"
+		},
+		{
+			"name": "entity.name.tag.plantuml",
+			"match": "^\\s*\\|{2}\\d+\\|{2}",
+			"comment": "シーケンス図の間隔その１"
+		},
+		{
+			"name": "entity.name.tag.plantuml",
+			"match": "^\\s*(\\|(.+?))+\\|",
+			"comment": "アクティビティ図の導線"
+		},
+		{
+			"name": "entity.name.tag.plantuml",
+			"match": "<<.*?>>",
+			"comment": "ステレオタイプ"
+		},
+		{
+			"name": "entity.name.tag.plantuml",
+			"match": "^\\s*__.*__",
+			"comment": "クラス図の境界線A"
+		},
+		{
+			"name": "entity.name.tag.plantuml",
+			"match": "^\\s*__",
+			"comment": "クラス図の境界線B"
+		},
+		{
+			"match": "(?i:(^\\s*)(if|else\\s*?if)(\\s*\\()(.*?)(\\)\\s*then)((\\s*\\()(.*?)(\\)))?)",
+			"captures": {
+			"1": { "name": "keyword.control.plantuml" },
+			"2": { "name": "keyword.control.plantuml" },
+			"3": { "name": "keyword.control.plantuml" },
+			"4": { "name": "string.interpolated.plantuml" },
+			"5": { "name": "keyword.control.plantuml" },
+			"7": { "name": "keyword.control.plantuml" },
+			"8": { "name": "string.interpolated.plantuml" },
+			"9": { "name": "keyword.control.plantuml" }
+			},
+			"comment": "if文"
+		},
+		{
+			"match": "(?i:(while)(\\s*\\()(.*?)(\\))((\\s*is\\s*\\()(.*?)(\\)))?)",
+			"captures": {
+			"1": { "name": "keyword.control.plantuml" },
+			"2": { "name": "keyword.control.plantuml" },
+			"3": { "name": "string.interpolated.plantuml" },
+			"4": { "name": "keyword.control.plantuml" },
+			"5": { "name": "string.interpolated.plantuml" },
+			"6": { "name": "keyword.control.plantuml" },
+			"7": { "name": "string.interpolated.plantuml" },
+			"8": { "name": "keyword.control.plantuml" }
+			},
+			"comment": "while文"
+		},
+		{
+			"match": "(?i:^\\s*(else)((\\s*\\()(.*?)(\\)))?)",
+			"captures": {
+			"1": { "name": "keyword.control.plantuml" },
+			"3": { "name": "keyword.control.plantuml" },
+			"4": { "name": "string.interpolated.plantuml" },
+			"5": { "name": "keyword.control.plantuml" },
+			"6": { "name": "string.interpolated.plantuml" }
+			},
+			"comment": "else"
+		},
+		{
+			"name": "string.other.plantuml",
+			"match": "(\\[[^\\]]+?\\])",
+			"comment": "コンポーネント"
+		},
+		{
+			"name": "string.other.plantuml",
+			"match": "(\\([^\\]]+?\\))",
+			"comment": "ユースケース"
+		},
+		{
+			"name": "string.other.plantuml",
+			"match": "(\\[\\*\\])",
+			"comment": "ステートの開始と終了"
+		},
+		{
+			"name": "string.other.plantuml",
+			"match": "(\\(\\))",
+			"comment": "ロリポップ"
+		},
+		{
+			"name" : "keyword.plantuml",
+			"match" : "^\\s*[-#~+]",
+			"comment": "クラスの可視性"
+		},
+		{
+			"name" : "support.type",
+			"match" : "\\b(?i:(ABackgroundColor|ActorBackgroundColor|ActorBorderColor|ActorFontColor|ActorFontName|ActorFontSize|ActorFontStyle|ActorStereotypeFontColor|ActorStereotypeFontName|ActorStereotypeFontSize|ActorStereotypeFontStyle|ArrowColor|ArrowFontColor|ArrowFontName|ArrowFontSize|ArrowFontStyle|AttributeFontColor|AttributeFontName|AttributeFontSize|AttributeFontStyle|AttributeIconSize|BackgroundColor|BarColor|BorderColor|CBackgroundColor|CharacterFontColor|CharacterFontName|CharacterFontSize|CharacterFontStyle|CharacterRadius|DividerFontColor|DividerFontName|DividerFontSize|DividerFontStyle|EBackgroundColor|EndColor|FontColor|FontName|FontSize|FontStyle|GroupBackgroundColor|GroupingFontColor|GroupingFontName|GroupingFontSize|GroupingFontStyle|GroupingHeaderFontColor|GroupingHeaderFontName|GroupingHeaderFontSize|GroupingHeaderFontStyle|IBackgroundColor|InterfaceBackgroundColor|InterfaceBorderColor|LifeLineBackgroundColor|LifeLineBorderColor|ParticipantBackgroundColor|ParticipantBorderColor|ParticipantFontColor|ParticipantFontName|ParticipantFontSize|ParticipantFontStyle|StartColor|StereotypeFontColor|StereotypeFontName|StereotypeFontSize|StereotypeFontStyle|TitleFontColor|TitleFontName|TitleFontSize|TitleFontStyle|activityArrowColor|activityArrowFontColor|activityArrowFontName|activityArrowFontSize|activityArrowFontStyle|activityBackgroundColor|activityBarColor|activityBorderColor|activityEndColor|activityFontColor|activityFontName|activityFontSize|activityFontStyle|activityStartColor|backgroundColor|circledCharacterFontColor|circledCharacterFontName|circledCharacterFontSize|circledCharacterFontStyle|circledCharacterRadius|classArrowColor|classArrowFontColor|classArrowFontName|classArrowFontSize|classArrowFontStyle|classAttributeFontColor|classAttributeFontName|classAttributeFontSize|classAttributeFontStyle|classAttributeIconSize|classBackgroundColor|classBorderColor|classFontColor|classFontName|classFontSize|classFontStyle|classStereotypeFontColor|classStereotypeFontName|classStereotypeFontSize|classStereotypeFontStyle|componentArrowColor|componentArrowFontColor|componentArrowFontName|componentArrowFontSize|componentArrowFontStyle|componentBackgroundColor|componentBorderColor|componentFontColor|componentFontName|componentFontSize|componentFontStyle|componentInterfaceBackgroundColor|componentInterfaceBorderColor|componentStereotypeFontColor|componentStereotypeFontName|componentStereotypeFontSize|componentStereotypeFontStyle|footerFontColor|footerFontName|footerFontSize|footerFontStyle|headerFontColor|headerFontName|headerFontSize|headerFontStyle|noteBackgroundColor|noteBorderColor|noteFontColor|noteFontName|noteFontSize|noteFontStyle|packageBackgroundColor|packageBorderColor|packageFontColor|packageFontName|packageFontSize|packageFontStyle|sequenceActorBackgroundColor|sequenceActorBorderColor|sequenceActorFontColor|sequenceActorFontName|sequenceActorFontSize|sequenceActorFontStyle|sequenceArrowColor|sequenceArrowFontColor|sequenceArrowFontName|sequenceArrowFontSize|sequenceArrowFontStyle|sequenceDividerFontColor|sequenceDividerFontName|sequenceDividerFontSize|sequenceDividerFontStyle|sequenceGroupBackgroundColor|sequenceGroupingFontColor|sequenceGroupingFontName|sequenceGroupingFontSize|sequenceGroupingFontStyle|sequenceGroupingHeaderFontColor|sequenceGroupingHeaderFontName|sequenceGroupingHeaderFontSize|sequenceGroupingHeaderFontStyle|sequenceLifeLineBackgroundColor|sequenceLifeLineBorderColor|sequenceParticipantBackgroundColor|sequenceParticipantBorderColor|sequenceParticipantFontColor|sequenceParticipantFontName|sequenceParticipantFontSize|sequenceParticipantFontStyle|sequenceTitleFontColor|sequenceTitleFontName|sequenceTitleFontSize|sequenceTitleFontStyle|stateArrowColor|stateArrowFontColor|stateArrowFontName|stateArrowFontSize|stateArrowFontStyle|stateAttributeFontColor|stateAttributeFontName|stateAttributeFontSize|stateAttributeFontStyle|stateBackgroundColor|stateBorderColor|stateEndColor|stateFontColor|stateFontName|stateFontSize|stateFontStyle|stateStartColor|stereotypeABackgroundColor|stereotypeCBackgroundColor|stereotypeEBackgroundColor|stereotypeIBackgroundColor|titleFontColor|titleFontName|titleFontSize|titleFontStyle|usecaseActorBackgroundColor|usecaseActorBorderColor|usecaseActorFontColor|usecaseActorFontName|usecaseActorFontSize|usecaseActorFontStyle|usecaseActorStereotypeFontColor|usecaseActorStereotypeFontName|usecaseActorStereotypeFontSize|usecaseActorStereotypeFontStyle|usecaseArrowColor|usecaseArrowFontColor|usecaseArrowFontName|usecaseArrowFontSize|usecaseArrowFontStyle|usecaseBackgroundColor|usecaseBorderColor|usecaseFontColor|usecaseFontName|usecaseFontSize|usecaseFontStyle|usecaseStereotypeFontColor|usecaseStereotypeFontName|usecaseStereotypeFontSize|usecaseStereotypeFontStyle))\\b",
+			"comment": "スキンパラメータ"
+		},
+		{
+			"match": "(?i:^\\s*(\\!)(include|define|definelong|ifdef|endif|enddefinelong)\\b(.*)$)",
+			"captures": {
+			"1": { "name": "support.function.plantuml" },
+			"2": { "name": "support.function.plantuml" },
+			"3": { "name": "string.interpolated.plantuml" }
+			},
+			"comment": "プリプロセッサ"
+		}
+	],
+	"scopeName": "text.plantuml"
+}

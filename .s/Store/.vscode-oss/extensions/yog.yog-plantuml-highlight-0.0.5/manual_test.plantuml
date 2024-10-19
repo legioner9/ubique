@@ -1,0 +1,1858 @@
+' シーケンス図
+@startuml
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+@enduml
+
+@startuml
+actor Foo1
+boundary Foo2
+control Foo3
+entity Foo4
+database Foo5
+Foo1 -> Foo2 : To boundary
+Foo1 -> Foo3 : To control
+Foo1 -> Foo4 : To entity
+Foo1 -> Foo5 : To database
+@enduml
+
+@startuml
+actor Bob #red
+' The only difference between actor
+'and participant is the drawing
+participant Alice
+participant "I have a really\nlong name" as L #99FF99
+/' You can also declare:
+participant L as "I have a really\nlong name" #99FF99
+'/
+Alice ->Bob: Authentication Request
+Bob->Alice: Authentication Response
+Bob->L: Log transaction
+@enduml
+
+@startuml
+Alice -> "Bob()" : Hello
+"Bob()" -> "This is very\nlong" as Long
+' You can also declare:
+' "Bob()" -> Long as "This is very\nlong"
+Long --> "Bob()" : ok
+@enduml
+
+@startuml
+Alice ->Alice: This is a signal to self.\nIt also demonstrates\nmultiline \ntext
+@enduml
+
+@startuml
+Bob ->x Alice
+Bob -> Alice
+Bob ->> Alice
+Bob -\ Alice
+Bob \\- Alice
+Bob //-- Alice
+Bob ->o Alice
+Bob o\\-- Alice
+Bob <-> Alice
+Bob <->o Alice
+@enduml
+
+@startuml
+Bob -[#red]> Alice : hello
+Alice -[#0000FF]->Bob : ok
+@enduml
+
+@startuml
+autonumber
+Bob -> Alice : Authentication Request
+Bob <- Alice : Authentication Response
+@enduml
+
+@startuml
+autonumber
+Bob -> Alice : Authentication Request
+Bob <- Alice : Authentication Response
+autonumber 15
+Bob -> Alice : Another authentication Request
+Bob <- Alice : Another authentication Response
+autonumber 40 10
+Bob -> Alice : Yet another authentication Request
+Bob <- Alice : Yet another authentication Response
+@enduml
+
+@startuml
+autonumber "<b>[000]"
+Bob -> Alice : Authentication Request
+Bob <- Alice : Authentication Response
+autonumber 15 "<b>(<u>##</u>)"
+Bob -> Alice : Another authentication Request
+Bob <- Alice : Another authentication Response
+autonumber 40 10 "<font color=red><b>Message 0 "
+Bob -> Alice : Yet another authentication Request
+Bob <- Alice : Yet another authentication Response
+@enduml
+
+@startuml
+autonumber 10 10 "<b>[000]"
+Bob -> Alice : Authentication Request
+Bob <- Alice : Authentication Response
+autonumber stop
+Bob -> Alice : dummy
+autonumber resume "<font color=red><b>Message 0 "
+Bob -> Alice : Yet another authentication Request
+Bob <- Alice : Yet another authentication Response
+autonumber stop
+Bob -> Alice : dummy
+autonumber resume 1 "<font color=blue><b>Message 0 "
+Bob -> Alice : Yet another authentication Request
+Bob <- Alice : Yet another authentication Response
+@enduml
+
+@startuml
+title Simple communication example
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+@enduml
+
+@startuml
+caption figure 1
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+@enduml
+
+@startuml
+Alice -> Bob : Hello
+legend right
+Short
+legend
+endlegend
+@enduml
+
+@startuml
+Alice -> Bob : message 1
+Alice -> Bob : message 2
+newpage
+Alice -> Bob : message 3
+Alice -> Bob : message 4
+newpage A title for the\nlast page
+Alice -> Bob : message 5
+Alice -> Bob : message 6
+@enduml
+
+@startuml
+Alice -> Bob: Authentication Request
+alt successful case
+Bob -> Alice: Authentication Accepted
+else some kind of failure
+Bob -> Alice: Authentication Failure
+group My own label
+Alice -> Log : Log attack start
+loop 1000 times
+Alice -> Bob: DNS Attack
+end
+Alice -> Log : Log attack end
+end
+else Another type of failure
+Bob -> Alice: Please repeat
+end
+@enduml
+
+@startuml
+Alice ->Bob : hello
+note left: this is a first note
+Bob->Alice : ok
+note right: this is another note
+Bob->Bob : I am thinking
+note left
+a note
+can also be defined
+on several lines
+end note
+@enduml
+
+@startuml
+participant Alice
+participant Bob
+note left of Alice #aqua
+This is displayed
+left of Alice.
+end note
+note right of Alice: This is displayed right of Alice.
+note over Alice: This is displayed over Alice.
+note over Alice , Bob #FFAAAA: This is displayed\n over Bob and Alice.
+note over Bob, Alice
+This is yet another
+example of
+a long note.
+end note
+@enduml
+
+@startuml
+caller -> server : conReq
+hnote over caller : idle
+caller <- server : conConf
+rnote over server
+"r" as rectangle
+"h" as hexagon
+endrnote
+@enduml
+
+@startuml
+participant Alice
+participant "The **Famous** Bob" as Bob
+Alice -> Bob : hello --there --
+... Some ~~long delay~~ ...
+Bob -> Alice : ok
+note left
+This is **bold**
+This is //italics//
+This is ""monospaced""
+This is --stroked --
+This is __underlined__
+This is ~~waved~~
+end note
+Alice -> Bob : A //well formatted// message
+note right of Alice
+This is <back:cadetblue ><size:18>displayed </size ></back>
+__left of__ Alice.
+end note
+note left of Bob
+<u:red>This </u> is <color #118888>displayed </color >
+**<color purple >left of</color > <s:red>Alice </strike > Bob**.
+end note
+note over Alice , Bob
+<w:#FF33FF >This is hosted </w> by <img sourceforge.jpg>
+end note
+@enduml
+
+@startuml
+== Initialization ==
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+== Repetition ==
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+@enduml
+
+@startuml
+participant Alice
+actor Bob
+ref over Alice , Bob : init
+Alice -> Bob : hello
+ref over Bob
+This can be on
+several lines
+end ref
+@enduml
+
+@startuml
+Alice -> Bob: Authentication Request
+...
+Bob --> Alice: Authentication Response
+...5 minutes latter...
+Bob --> Alice: Bye !
+@enduml
+
+@startuml
+Alice -> Bob: message 1
+Bob --> Alice: ok
+|||
+Alice -> Bob: message 2
+Bob --> Alice: ok
+||45||
+Alice -> Bob: message 3
+Bob --> Alice: ok
+@enduml
+
+@startuml
+participant User
+User -> A: DoWork
+activate A
+A -> B: << createRequest >>
+activate B
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+B --> A: RequestCreated
+deactivate B
+A -> User: Done
+deactivate A
+@enduml
+
+@startuml
+participant User
+User -> A: DoWork
+activate A #FFBBBB
+A -> A: Internal call
+activate A #DarkSalmon
+A -> B: << createRequest >>
+activate B
+B --> A: RequestCreated
+deactivate B
+deactivate A
+A -> User: Done
+deactivate A
+@enduml
+
+@startuml
+Bob -> Alice : hello
+create Other
+Alice -> Other : new
+create control String
+Alice -> String
+note right : You can also put notes!
+Alice --> Bob : ok
+@enduml
+
+@startuml
+[-> A: DoWork
+activate A
+A -> A: Internal call
+activate A
+A ->] : << createRequest >>
+A<--] : RequestCreated
+deactivate A
+[<- A: Done
+deactivate A
+@enduml
+
+@startuml
+[-> Bob
+[o-> Bob
+[o->o Bob
+[x-> Bob
+[<- Bob
+[x<- Bob
+Bob ->]
+Bob ->o]
+Bob o->o]
+Bob ->x]
+Bob <-]
+Bob x<-]
+@enduml
+
+@startuml
+participant "Famous Bob" as Bob << Generated >>
+participant Alice << (C,#ADD1B2) Testable >>
+Bob->Alice: First message
+@enduml
+
+@startuml
+skinparam guillemet false
+participant "Famous Bob" as Bob << Generated >>
+participant Alice << (C,#ADD1B2) Testable >>
+Bob->Alice: First message
+@enduml
+
+@startuml
+participant Bob << (C,#ADD1B2) >>
+participant Alice << (C,#ADD1B2) >>
+Bob->Alice: First message
+@enduml
+
+@startuml
+title __Simple__ **communication** example
+Alice -> Bob: Authentication Request
+Bob -> Alice: Authentication Response
+@enduml
+
+@startuml
+title __Simple__ communication example\non several lines
+Alice -> Bob: Authentication Request
+Bob -> Alice: Authentication Response
+@enduml
+
+@startuml
+title
+<u>Simple </u> communication example
+on <i>several </i> lines and using <font color=red>html </font>
+This is hosted by <img:sourceforge.jpg>
+end title
+Alice -> Bob: Authentication Request
+Bob -> Alice: Authentication Response
+@enduml
+
+@startuml
+box "Internal Service" #LightBlue
+participant Bob
+participant Alice
+end box
+participant Other
+Bob -> Alice : hello
+Alice -> Other : hello
+@enduml
+
+@startuml
+hide footbox
+title Footer removed
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+@enduml
+
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam maxmessagesize 60
+skinparam sequenceParticipant underline
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+User -> A: DoWork
+activate A
+A -> B: Create Request
+activate B
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+B --> A: Request Created
+deactivate B
+A --> User: Done
+deactivate A
+@enduml
+
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ActorBorderColor DeepSkyBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+ParticipantBorderColor DeepSkyBlue
+ParticipantBackgroundColor DodgerBlue
+ParticipantFontName Impact
+ParticipantFontSize 17
+ParticipantFontColor #A9DCDF
+ActorBackgroundColor aqua
+ActorFontColor DeepSkyBlue
+ActorFontSize 17
+ActorFontName Aapex
+}
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+User -> A: DoWork
+activate A
+A -> B: Create Request
+activate B
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+B --> A: Request Created
+deactivate B
+A --> User: Done
+deactivate A
+@enduml
+
+' ユースケース図
+@startuml
+(First usecase)
+(Another usecase) as (UC2)
+usecase UC3
+usecase (Last\nusecase) as UC4
+@enduml
+
+@startuml
+:First Actor:
+:Another\nactor: as Men2
+actor Men3
+actor :Last actor: as Men4
+@enduml
+
+@startuml
+usecase UC1 as "You can use
+several lines to define your usecase.
+You can also use separators.
+--
+Several separators are possible.
+==
+And you can add titles:
+..Conclusion..
+This allows large description."
+@enduml
+
+@startuml
+User -> (Start)
+User --> (Use the application) : A small label
+:Main Admin: ---> (Use the application) : This is\nyet another\nlabel
+@enduml
+
+@startuml
+:Main Admin: as Admin
+(Use the application) as (Use)
+User <|-- Admin
+(Start) <|-- (Use)
+@enduml
+
+@startuml
+:Main Admin: as Admin
+(Use the application) as (Use)
+User -> (Start)
+User --> (Use)
+Admin ---> (Use)
+note right of Admin : This is an example.
+note right of (Use)
+A note can also
+be on several lines
+end note
+note "This note is connected\nto several objects." as N2
+(Start) .. N2
+N2 .. (Use)
+@enduml
+
+@startuml
+User << Human >>
+:Main Database: as MySql << Application >>
+(Start) << One Shot >>
+(Use the application) as (Use) << Main >>
+User -> (Start)
+User --> (Use)
+MySql --> (Use)
+@enduml
+
+@startuml
+:user: --> (Use case 1)
+:user: -> (Use case 2)
+@enduml
+
+@startuml
+(Use case 1) <.. :user:
+(Use case 2) <- :user:
+@enduml
+
+@startuml
+:user: -left-> (dummyLeft)
+:user: -right-> (dummyRight)
+:user: -up-> (dummyUp)
+:user: -down-> (dummyDown)
+@enduml
+
+@startuml
+title Simple <b>Usecase </b>\nwith one actor
+"Use the application" as (Use)
+User -> (Use)
+@enduml
+
+@startuml
+:actor1: --> (Usecase1)
+newpage
+:actor2: --> (Usecase2)
+@enduml
+
+@startuml
+'default
+top to bottom direction
+user1 --> (Usecase 1)
+user2 --> (Usecase 2)
+@enduml
+
+@startuml
+left to right direction
+user1 --> (Usecase 1)
+user2 --> (Usecase 2)
+@enduml
+
+@startuml
+skinparam handwritten true
+skinparam usecase {
+BackgroundColor DarkSeaGreen
+BorderColor DarkSlateGray
+BackgroundColor << Main >> YellowGreen
+BorderColor << Main >> YellowGreen
+ArrowColor Olive
+ActorBorderColor black
+ActorFontName Courier
+ActorBackgroundColor << Human >> Gold
+}
+User << Human >>
+:Main Database: as MySql << Application >>
+(Start) << One Shot >>
+(Use the application) as (Use) << Main >>
+User -> (Start)
+User --> (Use)
+MySql --> (Use)
+@enduml
+
+@startuml
+left to right direction
+skinparam packageStyle rect
+actor customer
+actor clerk
+rectangle checkout {
+customer -- (checkout)
+(checkout) .> (payment) : include
+(help) .> (checkout) : extends
+(checkout) -- clerk
+}
+@enduml
+
+' クラス図
+@startuml
+Class01 <|-- Class02
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 -- Class10
+@enduml
+
+@startuml
+Class11 <|.. Class12
+Class13 --> Class14
+Class15 ..> Class16
+Class17 ..|> Class18
+Class19 <--* Class20
+@enduml
+
+@startuml
+Class01 "1" *-- "many" Class02 : contains
+Class03 o-- Class04 : aggregation
+Class05 --> "1" Class06
+@enduml
+
+@startuml
+class Car
+Driver - Car : drives >
+Car *- Wheel : have 4 >
+Car -- Person : < owns
+@enduml
+
+@startuml
+Object <|-- ArrayList
+Object : equals()
+ArrayList : Object[] elementData
+ArrayList : size()
+@enduml
+
+@startuml
+class Dummy {
+String data
+void methods()
+}
+class Flight {
+flightNumber : Integer
+departureTime : Date
+}
+@enduml
+
+@startuml
+class Dummy {
+-field1
+#field2
+~method1()
++method2()
+}
+@enduml
+
+@startuml
+skinparam classAttributeIconSize 0
+class Dummy {
+-field1
+#field2
+~method1()
++method2()
+}
+@enduml
+
+@startuml
+class Dummy {
+{static} String id
+{abstract} void methods()
+}
+@enduml
+
+@startuml
+class Foo1 {
+You can use
+several lines
+..
+as you want
+and group
+==
+things together.
+__
+You can have as many groups
+as you want
+--
+End of class
+}
+class User {
+.. Simple Getter ..
++ getName()
++ getAddress()
+.. Some setter ..
++ setName()
+__ private data __
+int age
+-- encrypted --
+String password
+}
+@enduml
+
+@startuml
+class Object << general >>
+Object <|--- ArrayList
+note top of Object : In java, every class\nextends this one.
+note "This is a floating note" as N1
+end note
+note "This note is connected\nto several objects." as N2
+end note
+Object .. N2
+N2 .. ArrayList
+class Foo
+note left: On last defined class
+@enduml
+
+@startuml
+class Foo
+note left: On last defined class
+note top of Object
+In java, <size:18>every </size> <u>class </u>
+<b>extends </b>
+<i>this </i> one.
+end note
+note as N1
+This note is <u>also </u>
+<b><color:royalBlue >on several </color >
+<s>words </s> lines
+And this is hosted by <img:sourceforge.jpg>
+end note
+@enduml
+
+@startuml
+class Dummy
+Dummy --> Foo : A link
+note on link #red: note that is red
+Dummy --> Foo2 : Another link
+note right on link #blue
+this is my note on right link
+and in blue
+end note
+@enduml
+
+@startuml
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+class ArrayList {
+Object[] elementData
+size()
+}
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+annotation SuppressWarnings
+@enduml
+
+@startuml
+class "This is my class" as class1
+class class2 as "It works this way too"
+class2 *-- "foo/dummy" : use
+@enduml
+
+@startuml
+class Dummy1 {
++myMethods()
+}
+class Dummy2 {
++hiddenMethod()
+}
+class Dummy3 <<Serializable >> {
+String name
+}
+hide members
+hide <<Serializable >> circle
+show Dummy1 methods
+show <<Serializable >> fields
+@enduml
+
+@startuml
+class Foo1
+class Foo2
+Foo2 *-- Foo1
+hide Foo2
+@enduml
+
+@startuml
+class Foo<? extends Element > {
+int size()
+}
+Foo *- Element
+@enduml
+
+@startuml
+class System << (S,#FF7700) Singleton >>
+class Date << (D,orchid) >>
+@enduml
+
+@startuml
+package "Classic Collections" #DDDDDD {
+Object <|-- ArrayList
+}
+package net.sourceforge.plantuml {
+Object <|-- Demo1
+Demo1 *- Demo2
+}
+@enduml
+
+@startuml
+scale 750 width
+package foo1 <<Node>> {
+class Class1
+}
+package foo2 <<Rect>> {
+class Class2
+}
+package foo3 <<Folder >> {
+class Class3
+}
+package foo4 <<Frame >> {
+class Class4
+}
+package foo5 <<Cloud >> {
+class Class5
+}
+package foo6 <<Database >> {
+class Class6
+}
+@enduml
+
+@startuml
+skinparam packageStyle rect
+package foo1.foo2 {
+}
+package foo1.foo2.foo3 {
+class Object
+}
+foo1.foo2 +-- foo1.foo2.foo3
+@enduml
+
+@startuml
+class BaseClass
+namespace net.dummy #DDDDDD {
+.BaseClass <|-- Person
+Meeting o-- Person
+.BaseClass <|- Meeting
+}
+namespace net.foo {
+net.dummy.Person <|- Person
+.BaseClass <|-- Person
+net.dummy.Meeting o-- Person
+}
+BaseClass <|-- net.unused.Person
+@enduml
+
+@startuml
+set namespaceSeparator ::
+class X1::X2::foo {
+some info
+}
+@enduml
+
+@startuml
+set namespaceSeparator none
+class X1.X2.foo {
+some info
+}
+@enduml
+
+@startuml
+class foo
+bar ()- foo
+@enduml
+
+@startuml
+Room o- Student
+Room *-- Chair
+@enduml
+
+@startuml
+Student -o Room
+Chair --* Room
+@enduml
+
+@startuml
+foo -left-> dummyLeft
+foo -right-> dummyRight
+foo -up-> dummyUp
+foo -down-> dummyDown
+@enduml
+
+@startuml
+title Simple <b>example </b>\nof title
+Object <|-- ArrayList
+@enduml
+
+@startuml
+Object <|- ArrayList
+legend right
+<b>Object </b> and <b>ArrayList </b>
+are simple class
+endlegend
+@enduml
+
+@startuml
+class Student {
+Name
+}
+Student "0..*" - "1..*" Course
+(Student , Course) .. Enrollment
+class Enrollment {
+drop()
+cancel()
+}
+@enduml
+
+@startuml
+class Student {
+Name
+}
+Student "0..*" -- "1..*" Course
+(Student , Course) . Enrollment
+class Enrollment {
+drop()
+cancel()
+}
+@enduml
+
+@startuml
+skinparam class {
+BackgroundColor PaleGreen
+ArrowColor SeaGreen
+BorderColor SpringGreen
+}
+skinparam stereotypeCBackgroundColor YellowGreen
+Class01 "1" *-- "many" Class02 : contains
+Class03 o-- Class04 : aggregation
+@enduml
+
+@startuml
+skinparam class {
+BackgroundColor PaleGreen
+ArrowColor SeaGreen
+BorderColor SpringGreen
+BackgroundColor <<Foo>> Wheat
+BorderColor <<Foo>> Tomato
+}
+skinparam stereotypeCBackgroundColor YellowGreen
+skinparam stereotypeCBackgroundColor << Foo >> DimGray
+Class01 <<Foo>>
+Class03 <<Foo>>
+Class01 "1" *-- "many" Class02 : contains
+Class03 o-- Class04 : aggregation
+@enduml
+
+@startuml
+skinparam backgroundcolor AntiqueWhite/Gold
+skinparam classBackgroundColor Wheat|CornflowerBlue
+class Foo #red-green
+note left of Foo #blue\9932CC
+this is my
+note on this class
+end note
+package example #GreenYellow/LightGoldenRodYellow {
+class Dummy
+}
+@enduml
+
+@startuml
+class Bar1
+class Bar2
+together {
+class Together1
+class Together2
+class Together3
+}
+Together1 - Together2
+Together2 - Together3
+Together2 -[hidden]--> Bar1
+Bar1 -[hidden]> Bar2
+@enduml
+
+@startuml
+' Split into 4 pages
+page 2x2
+class BaseClass
+namespace net.dummy #DDDDDD {
+.BaseClass <|-- Person
+Meeting o-- Person
+.BaseClass <|- Meeting
+}
+namespace net.foo {
+net.dummy.Person <|- Person
+.BaseClass <|-- Person
+net.dummy.Meeting o-- Person
+}
+BaseClass <|-- net.unused.Person
+@enduml
+
+'アクティビティ図
+@startuml
+:Hello world;
+:This is on defined on
+several **lines**;
+@enduml
+
+@startuml
+start
+:Hello world;
+:This is on defined on
+several **lines**;
+stop
+@enduml
+
+@startuml
+start
+:Hello world;
+:This is on defined on
+several **lines**;
+end
+@enduml
+
+@startuml
+start
+if (Graphviz installed?) then (yes)
+:process all\ndiagrams;
+else (no)
+:process only
+__sequence__ and __activity__ diagrams;
+endif
+stop
+@enduml
+
+@startuml
+start
+if (condition A) then (yes)
+:Text 1;
+elseif (condition B) then (yes)
+:Text 2;
+stop
+elseif (condition C) then (yes)
+:Text 3;
+elseif (condition D) then (yes)
+:Text 4;
+else (nothing)
+:Text else;
+endif
+stop
+@enduml
+
+@startuml
+start
+repeat
+:read data;
+:generate diagrams;
+repeat while (more data?)
+stop
+@enduml
+
+@startuml
+start
+while (data available?)
+:read data;
+:generate diagrams;
+endwhile
+stop
+@enduml
+
+@startuml
+while (check filesize ?) is (not empty)
+:read file;
+endwhile (empty)
+:close file;
+@enduml
+
+@startuml
+start
+if (multiprocessor?) then (yes)
+fork
+:Treatment 1;
+fork again
+:Treatment 2;
+end fork
+else (monoproc)
+:Treatment 1;
+:Treatment 2;
+endif
+@enduml
+
+@startuml
+start
+:foo1;
+floating note left: This is a note
+:foo2;
+note right
+This note is on several
+//lines// and can
+contain <b>HTML </b>
+====
+* Calling the method ""foo()"" is prohibited
+end note
+stop
+@enduml
+
+@startuml
+title this is my title
+if (condition?) then (yes)
+:yes;
+else (no)
+:no;
+note right
+this is a note
+end note
+endif
+
+stop
+legend
+this is the legend
+endlegend
+footer dummy footer
+header
+this is
+a long __dummy__ header
+end header
+@enduml
+
+@startuml
+start
+:starting progress;
+#HotPink:reading configuration files
+These files should edited at this point!;
+#AAAAAA:ending of the process;
+@enduml
+
+@startuml
+:foo1;
+-> You can put text on arrows;
+if (test) then
+-[#blue]->
+:foo2;
+-[#green ,dashed]-> The text can
+also be on several lines
+and **very** long...;
+:foo3;
+else
+-[#black ,dotted]->
+:foo4;
+endif
+-[#gray,bold]->
+:foo5;
+@enduml
+
+@startuml
+start
+partition Initialization {
+:read config file;
+:init internal variable;
+}
+partition Running {
+:wait for user interaction;
+:print information;
+}
+stop
+@enduml
+
+@startuml
+|Swimlane1|
+start
+:foo1;
+|#AntiqueWhite|Swimlane2|
+:foo2;
+:foo3;
+|Swimlane1|
+:foo4;
+|Swimlane2|
+:foo5;
+stop
+@enduml
+
+@startuml
+:start;
+fork
+:foo1;
+:foo2;
+fork again
+:foo3;
+detach
+endfork
+if (foo4) then
+:foo5;
+detach
+endif
+:foo6;
+detach
+:foo7;
+stop
+@enduml
+
+@startuml
+:Ready;
+:next(o)|
+:Receiving;
+split
+:nak(i)<
+:ack(o)>
+split again
+:ack(i)<
+:next(o)
+on several line|
+:i := i + 1]
+:ack(o)>
+split again
+:err(i)<
+:nak(o)>
+split again
+:foo/
+split again
+:i > 5}
+stop
+end split
+:finish;
+@enduml
+
+@startuml
+start
+:ClickServlet.handleRequest();
+:new page;
+if (Page.onSecurityCheck) then (true)
+:Page.onInit();
+if (isForward?) then (no)
+:Process controls;
+if (continue processing?) then (no)
+stop
+endif
+if (isPost?) then (yes)
+:Page.onPost();
+else (no)
+:Page.onGet();
+endif
+:Page.onRender();
+endif
+else (false)
+endif
+if (do redirect?) then (yes)
+:redirect process;
+else
+if (do forward?) then (yes)
+:Forward request;
+else (no)
+:Render page template;
+endif
+endif
+stop
+@enduml
+
+' コンポーネント図
+@startuml
+[First component]
+[Another component] as Comp2
+component Comp3
+component [Last\ncomponent] as Comp4
+@enduml
+
+@startuml
+() "First Interface"
+() "Another interface" as Interf2
+interface Interf3
+interface "Last\ninterface" as Interf4
+@enduml
+
+@startuml
+DataAccess - [First Component]
+[First Component] ..> HTTP : use
+@enduml
+
+@startuml
+interface "Data Access" as DA
+DA - [First Component]
+[First Component] ..> HTTP : use
+note left of HTTP : Web Service only
+note right of [First Component]
+A note can also
+be on several lines
+end note
+@enduml
+
+@startuml
+package "Some Group" {
+HTTP - [First Component]
+[Another Component]
+}
+node "Other Groups" {
+FTP - [Second Component]
+[First Component] --> FTP
+}
+cloud {
+[Example 1]
+}
+database "MySql" {
+folder "This is my folder" {
+[Folder 3]
+}
+frame "Foo" {
+[Frame 4]
+}}
+[Another Component] --> [Example 1]
+[Example 1] --> [Folder 3]
+[Folder 3] --> [Frame 4]
+@enduml
+
+@startuml
+[Component] --> Interface1
+[Component] -> Interface2
+@enduml
+
+@startuml
+Interface1 <-- [Component]
+Interface2 <- [Component]
+@enduml
+
+@startuml
+[Component] -left-> left
+[Component] -right-> right
+[Component] -up-> up
+[Component] -down-> down
+@enduml
+
+@startuml
+title Very simple component\ndiagram
+interface "Data Access" as DA
+DA - [First Component]
+[First Component] ..> HTTP : use
+@enduml
+
+@startuml
+skinparam componentStyle uml2
+interface "Data Access" as DA
+DA - [First Component]
+[First Component] ..> HTTP : use
+@enduml
+
+@startuml
+component [Web Server] #Yellow
+@enduml
+
+@startuml
+sprite $businessProcess [16x16/16] {
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFF0FFFFF
+FFFFFFFFFF00FFFF
+FF00000000000FFF
+FF000000000000FF
+FF00000000000FFF
+FFFFFFFFFF00FFFF
+FFFFFFFFFF0FFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+}
+rectangle " End to End\nbusiness process" <<$businessProcess >> {
+rectangle "inner process 1" <<$businessProcess >> as src
+rectangle "inner process 2" <<$businessProcess >> as tgt
+src -> tgt
+}
+@enduml
+
+@startuml
+skinparam component {
+FontSize 13
+InterfaceBackgroundColor RosyBrown
+InterfaceBorderColor orange
+BackgroundColor <<Apache >> Red
+BorderColor <<Apache >> #FF6655
+FontName Courier
+BorderColor black
+BackgroundColor gold
+ArrowFontName Impact
+ArrowColor #FF6655
+ArrowFontColor #777777
+}
+() "Data Access" as DA
+DA - [First Component]
+[First Component] ..> () HTTP : use
+HTTP - [Web Server] << Apache >>
+@enduml
+
+@startuml
+[AA] <<static lib>>
+[BB] <<shared lib>>
+[CC] <<static lib>>
+node node1
+node node2 <<shared node>>
+database Production
+skinparam component {
+backgroundColor <<static lib>> DarkKhaki
+backgroundColor <<shared lib>> Green
+}
+skinparam node {
+borderColor Green
+backgroundColor Yellow
+backgroundColor <<shared node>> Magenta
+}
+skinparam databaseBackgroundColor Aqua
+@enduml
+
+' ステート図
+@startuml
+[*] --> State1
+State1 --> [*]
+State1 : this is a string
+State1 : this is another string
+State1 -> State2
+State2 --> [*]
+@enduml
+
+@startuml
+scale 350 width
+[*] --> NotShooting
+state NotShooting {
+[*] --> Idle
+Idle --> Configuring : EvConfig
+Configuring --> Idle : EvConfig
+}
+state Configuring {
+[*] --> NewValueSelection
+NewValueSelection --> NewValuePreview : EvNewValue
+NewValuePreview --> NewValueSelection : EvNewValueRejected
+NewValuePreview --> NewValueSelection : EvNewValueSaved
+state NewValuePreview {
+State1 -> State2
+} }
+@enduml
+
+@startuml
+scale 600 width
+[*] -> State1
+State1 --> State2 : Succeeded
+State1 --> [*] : Aborted
+State2 --> State3 : Succeeded
+State2 --> [*] : Aborted
+state State3 {
+state "Accumulate Enough Data\nLong State Name" as long1
+long1 : Just a test
+[*] --> long1
+long1 --> long1 : New Data
+long1 --> ProcessData : Enough Data
+}
+State3 --> State3 : Failed
+State3 --> [*] : Succeeded / Save Result
+State3 --> [*] : Aborted
+@enduml
+
+@startuml
+[*] --> Active
+state Active {
+[*] -> NumLockOff
+NumLockOff --> NumLockOn : EvNumLockPressed
+NumLockOn --> NumLockOff : EvNumLockPressed
+--
+[*] -> CapsLockOff
+CapsLockOff --> CapsLockOn : EvCapsLockPressed
+CapsLockOn --> CapsLockOff : EvCapsLockPressed
+--
+[*] -> ScrollLockOff
+ScrollLockOff --> ScrollLockOn : EvCapsLockPressed
+ScrollLockOn --> ScrollLockOff : EvCapsLockPressed
+}
+@enduml
+
+@startuml
+[*] -up-> First
+First -right-> Second
+Second --> Third
+Third -left-> Last
+@enduml
+
+@startuml
+[*] --> Active
+Active --> Inactive
+note left of Active : this is a short\nnote
+note right of Inactive
+A note can also
+be defined on
+several lines
+end note
+@enduml
+
+@startuml
+state foo
+note "This is a floating note" as N1
+@enduml
+
+@startuml
+[*] --> NotShooting
+state "Not Shooting State" as NotShooting {
+state "Idle mode" as Idle
+state "Configuring mode" as Configuring
+[*] --> Idle
+Idle --> Configuring : EvConfig
+Configuring --> Idle : EvConfig
+}
+note right of NotShooting : This is a note on a composite state
+@enduml
+
+@startuml
+skinparam backgroundColor LightYellow
+skinparam state {
+StartColor MediumBlue
+EndColor Red
+BackgroundColor Peru
+BackgroundColor <<Warning >> Olive
+BorderColor Gray
+FontName Impact
+}
+[*] --> NotShooting
+state "Not Shooting State" as NotShooting {
+state "Idle mode" as Idle <<Warning >>
+state "Configuring mode" as Configuring
+[*] --> Idle
+Idle --> Configuring : EvConfig
+Configuring --> Idle : EvConfig
+}
+NotShooting --> [*]
+@enduml
+
+' オブジェクト図
+@startuml
+object firstObject
+object "My Second Object" as o2
+@enduml
+
+@startuml
+object Object01
+object Object02
+object Object03
+object Object04
+object Object05
+object Object06
+object Object07
+object Object08
+Object01 <|-- Object02
+Object03 *-- Object04
+Object05 o-- "4" Object06
+Object07 .. Object08 : some labels
+@enduml
+
+@startuml
+object user
+user : name = "Dummy"
+user : id = 123
+@enduml
+
+@startuml
+object user {
+name = "Dummy"
+id = 123
+}
+@enduml
+
+' 共通コマンド
+@startuml
+Alice -> Bob: Authentication Request
+header
+<font color=red>Warning:</font>
+Do not use in production.
+endheader
+center footer Generated for demonstration
+@enduml
+
+@startuml
+scale 180*90
+Bob->Alice : hello
+@enduml
+
+' Creole
+@startuml
+Alice -> Bob : hello --there --
+... Some ~~long delay~~ ...
+Bob -> Alice : ok
+note left
+This is **bold**
+This is //italics//
+This is ""monospaced""
+This is --stroked --
+This is __underlined__
+This is ~~waved~~
+end note
+@enduml
+
+@startuml
+object demo {
+* Bullet list
+* Second item
+** Sub item
+}
+legend
+# Numbered list
+# Second item
+## Sub item
+## Another sub item
+# Third item
+end legend
+@enduml
+
+You can use the tilde ~ to escape special creole characters.
+@startuml
+object demo {
+This is not ~___underscored__.
+This is not ~""monospaced"".
+}
+@enduml
+
+@startuml
+database DB1 as "
+You can have horizontal line
+----
+Or double line
+====
+Or strong line
+____
+Or dotted line
+..My title..
+Enjoy!
+"
+note right
+This is working also in notes
+You can also add title in all these lines
+==Title==
+--Another title --
+end note
+@enduml
+
+@startuml
+usecase UC1 as "
+= Extra -large heading
+Some text
+== Large heading
+Other text
+=== Medium heading
+Information
+....
+==== Small heading"
+@enduml
+
+@startuml
+:* You can change <color:red>text color </color >
+* You can change <back:cadetblue >background color </back>
+* You can change <size:18>size </size>
+* You use <u>legacy </u> <b>HTML <i>tag</i></b>
+* You use <u:red>color </u> <s:green >in HTML </s> <w:#0000FF>tag</w>
+----
+* Use image : <img:sourceforge.jpg>
+;
+@enduml
+
+@startuml
+skinparam titleFontSize 14
+title
+Example of simple table
+|= |= table |= header |
+| a | table | row |
+| b | table | row |
+end title
+[*] --> State1
+@enduml
+
+@startuml
+skinparam titleFontSize 14
+title
+Example of Tree
+|_ First line
+|_ **Bom(Model)**
+|_ prop1
+|_ prop2
+|_ prop3
+|_ Last line
+end title
+[*] --> State1
+@enduml
+
+@startuml
+title: <size:20><&heart >Use of OpenIconic <&heart ></size>
+class Wifi
+note left
+Click on <&wifi>
+end note
+@enduml
+
+@startuml
+listopeniconic
+@enduml
+
+@startuml
+sprite $foo1 {
+FFFFFFFFFFFFFFF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+FFFFFFFFFFFFFFF
+}
+Alice -> Bob : Testing <$foo1 >
+@enduml
+
+@startuml
+sprite $printer [15x15/8z] NOtH3W0W208HxFz_kMAhj7lHWpa
+start
+:click on <$printer > to print the page;
+@enduml
+
+@startuml
+sprite $bug [15x15/16z] PKzR2i0m2BFMi15p__FEjQEqB1z27a
+sprite $printer [15x15/8z] NOtH3W0W208HxFz_kMAhj7lHWpa
+sprite $disk {
+444445566677881
+436000000009991
+43600000000ACA1
+53700000001A7A1
+53700000012B8A1
+53800000123B8A1
+63800001233C9A1
+634999AABBC99B1
+744566778899AB1
+7456AAAAA99AAB1
+8566AFC228AABB1
+8567AC8118BBBB1
+867BD4433BBBBB1
+39AAAAABBBBBBC1
+}
+title Use of sprites (<$printer >, <$bug >...)
+class Example {
+Can have some bug : <$bug>
+Click on <$disk > to save
+}
+note left : The printer <$printer > is available
+@enduml
+
+
+@startuml
+skinparam monochrome true
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+User -> A: DoWork
+activate A
+A -> B: Create Request
+activate B
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+B --> A: Request Created
+deactivate B
+A --> User: Done
+deactivate A
+@enduml
+
+@startuml
+!include List.iuml
+List <|.. ArrayList
+@enduml
+
+@startuml
+!define SEQUENCE (S,#AAAAAA) Database Sequence
+!define TABLE (T,#FFAAAA) Database Table
+class USER << TABLE >>
+class ACCOUNT << TABLE >>
+class UID << SEQUENCE >>
+USER "1" -- "*" ACCOUNT
+USER -> UID
+@enduml
+
+@startuml
+!define module(x) component x <<module >>
+module(ABC)
+module(XYZ)
+@enduml
+
+@startuml
+!define send(a,b,c) a->b : c
+send(Alice , Bob, Hello)
+send(Bob, Alice , ok)
+@enduml
+
+@startuml
+!define DOUBLE(x) x x
+!definelong AUTHEN(x,y)
+x -> y : DOUBLE(hello)
+y -> x : ok
+!enddefinelong
+AUTHEN(Bob,Alice)
+@enduml
+
+@startuml
+!include ArrayList.iuml
+@enduml
+
+@startuml
+!define SHOW_METHODS
+!include ArrayList.iuml
+@enduml
+
+@startuml
+!definelong COMP_TEXTGENCOMP(name)
+[name] << Comp >>
+interface Ifc << IfcType >> AS name##Ifc
+name##Ifc - [name]
+!enddefinelong
+COMP_TEXTGENCOMP(dummy)
+@enduml
+
+@startuml
+!define DOUBLE(x) x x
+!definelong AUTHEN(x,y)
+x -> y : DOUBLE(hello)
+y -> x : ok
+!enddefinelong
+AUTHEN(Bob,Alice)
+@enduml
+
+@startuml
+!define module(x) component x <<module >>
+!define module(x,y) component x as y <<module >>
+module(foo)
+module(bar, barcode)
+@enduml
+
+@startuml
+skinparam backgroundColor #EEEBDC
+actor 使用者
+participant " 頭等艙 " as A
+participant " 第二類 " as B
+participant " 最後 一堂 課 " as 別的東西
+使用者 -> A: 完 成 這 項 工 作
+activate A
+A -> B: 創建請求
+activate B
+B -> 別的東西 : 創建請求
+activate 別的東西
+別的東西 --> B: 這 項 工 作 完 成
+destroy 別的東西
+B --> A: 請求創建
+deactivate B
+A --> 使用者 : 做完
+deactivate A
+@enduml
+

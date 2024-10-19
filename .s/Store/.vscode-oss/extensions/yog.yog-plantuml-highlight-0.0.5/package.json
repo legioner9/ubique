@@ -1,0 +1,41 @@
+{
+	"name": "yog-plantuml-highlight",
+	"displayName": "Yog PlantUML Highlight",
+	"description": "PlantUML Syntax Higilight for Visual Studio Code",
+	"version": "0.0.5",
+	"publisher": "Yog",
+	"icon": "uml_highlight_icon.png",
+	"engines": {
+		"vscode": "^1.5.0"
+	},
+	"categories": [
+		"Languages"
+	],
+	"homepage": "https://yogsite.herokuapp.com/softwares/1",
+	"contributes": {
+		"languages": [
+			{
+				"id": "plantuml",
+				"aliases": [
+					"PlantUML",
+					"plantuml"
+				],
+				"extensions": [
+					".plantuml"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "plantuml",
+				"scopeName": "text.plantuml",
+				"path": "./syntaxes/plantuml.tmLanguage.json"
+			}
+		]
+	},
+	"__metadata": {
+		"isApplicationScoped": false,
+		"installedTimestamp": 1677238355600
+	}
+}
