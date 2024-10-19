@@ -1,0 +1,52 @@
+@startmindmap
+
+*:
+ПРИНЯТЫЕ ОБОЗНАЧЕНИЯ И УСЛОВНОСТИ :
+
+<file:> <path_to_file>
+<nnn:> - номер строки в файле
+указывается только значимый код 
+в терминах псевдокода похожего на bash
+source <path_to_file> влечет за собой 
+раскрытие содержания <path_to_file> в 
+правой секции соединенной с текущей секцией
+;
+
+*:
+
+STL ВНУТРЕННИЕ УПРАВЛЯЮЩИЕ ФАЙЛЫ STL
+
+1. (depr?) \~/.d/.lst.d/.st.lst список файлов с файл-путь к корню репо 
+подключаемой библиотеки
+
+$ cat \~/.d/.lst.d/.st.lst
+    ${HOME}/.d/.rc.d/.st_rc_d.rc
+    ${HOME}/.d/.rc.d/.sta.rc
+    ${HOME}/.d/.rc.d/.mane.rc
+    ${HOME}/.d/.rc.d/.stb.rc
+$ cat \~/.d/.rc.d/.st_rc_d.rc
+    ${HOME}/REPOBARE/_repo/st_rc_d
+
+2. \~/.stl/.path/ директория с файл-путь к корню репо 
+подключаемых библиотеки <lib_repo>
+ls \~/.stl/.path/ 
+    <lib_repo1>.path
+    ...
+
+
+USER ВНЕШНИЕ УПРАВЛЯЮЩИЕ ФАЙЛЫ STL
+
+1. \~/.is_bashrc_log 
+    flag=$(cat \~/.is_bashrc_log) 
+        if $flag=0 то вывод {source \~/.d/.rc.d/.st.rc.d/.st.rc} в stdout/err
+        if $flag=1 то вывод {source \~/.d/.rc.d/.st.rc.d/.st.rc} в \~/bashrc.log
+
+
+
+USER ВНЕШНИЕ ИНФОРМАЦИОННЫЕ ФАЙЛЫ STL
+
+1. \~/bashrc.log log of {source \~/.d/.rc.d/.st.rc.d/.st.rc}
+
+;
+
+@endmindmap

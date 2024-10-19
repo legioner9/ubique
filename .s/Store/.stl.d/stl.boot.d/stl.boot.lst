@@ -1,0 +1,17 @@
+# ifc :: <NAME_LIB_FOR_CONST>:path/<name_lib>.lib.d:path/<name_lib>.data.d
+
+# example
+# generate : STL_PATH=${HOME}/REPOBARE/_repo/stl/stl.lib.d
+# generate : STL_DATA_PATH=${HOME}/REPOBARE/_repo/stl/stl.data.d
+STL:${HOME}/REPOBARE/_repo/stl/stl.lib.d:${HOME}/REPOBARE/_repo/stl/stl.data.d
+
+STL1${HOME}/REPOBARE/_repo/stl1/stl1.lib.d:${HOME}/REPOBARE/_repo/stl1_data_st/stl1.data.d
+
+# example:
+# stl -  issue stl lib (underground lib)
+# redused (stl_data - user stl lib_data)
+# redused (stl_data_st - my stl lib_data)
+
+# stl1 -  issue stl1 lib (underground lib)
+# stl1_data - user stl1 lib_data
+# stl1_data_st - my stl1 lib_data
