@@ -8,6 +8,9 @@ Start Contents Menu
 
 <!-- TOC tocDepth:1..6 chapterDepth:1..6 -->
 
+- [Manifesto](#manifesto)
+  - [Рекомендации RCM](#рекомендации-rcm)
+
 <!-- /TOC -->
 
 End Contents Menu
@@ -19,9 +22,9 @@ PPWD: /home/st/REPOBARE/_repo/ubique/.d/.mul/rbld_readme.mul/.prc
 
 FLOW: /home/st/REPOBARE/_repo/sta/.d/.st_rc_d.data.d/ufl_stl0/.flow.d/009_dr2m
 
-DATE: 1730570402_03112024010002
+DATE: 1730571522_03112024011842
 
-DATX: 1730570402
+DATX: 1730571522
 -->
 
 
@@ -30,7 +33,8 @@ DATX: 1730570402
 
 
 # Manifesto
-    
+
+## [Рекомендации RCM](/REPOBARE/_repo/ubique/.d/.mul/rbld_readme.mul/.in_cnx/001.rcm.d/res.md)
 
 
 

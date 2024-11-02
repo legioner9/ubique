@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo -e "${CYAN}--- README_rnd7_85de09d() $* in file://${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.prc/README.md_ufl9 ---${NORMAL}" #started functions
+echo -e "${CYAN}--- README_rnd7_2e7692c() $* in file://${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.prc/README.md_ufl9 ---${NORMAL}" #started functions
 
-README_rnd7_85de09d() {
+README_rnd7_2e7692c() {
 
     # gig from file://${ST_RC_D_PATH}/.d/.arb/stl0.arb/ufl_stl0.ram/.grot/ufl_stl0.sh
 
@@ -69,4 +69,4 @@ ufl_stl0 9 ${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.cnx ${REPO_PATH}/ubique/
 
 }
 
-README_rnd7_85de09d "$@"
+README_rnd7_2e7692c "$@"
