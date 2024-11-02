@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo -e "${CYAN}--- rbld_readme_rnd7_3d6253b() $* in file://${HOME}/REPOBARE/_repo/ubique/.d/.mul/rbld_readme.mul/.prc/rbld_readme.sh---${NORMAL}" #started functions
+echo -e "${CYAN}--- README_rnd7_85de09d() $* in file://${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.prc/README.md_ufl9 ---${NORMAL}" #started functions
 
-rbld_readme_rnd7_3d6253b() {
+README_rnd7_85de09d() {
 
     # gig from file://${ST_RC_D_PATH}/.d/.arb/stl0.arb/ufl_stl0.ram/.grot/ufl_stl0.sh
 
@@ -10,7 +10,7 @@ rbld_readme_rnd7_3d6253b() {
     local ARGS=("$@")
     local NARGS=$#
     local PPWD=$PWD
-    local path_file=${HOME}/REPOBARE/_repo/ubique/.d/.mul/rbld_readme.mul/.prc/rbld_readme.sh
+    local path_file="${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.prc/README.md_ufl9"
     local path_dir="$(dirname "$path_file")"
 
     # echo -e "${CYAN}--- $FNN() $* in file://${path_file}---${NORMAL}" #started functions
@@ -38,6 +38,8 @@ ${NORMAL}"
 
     if [[ "_go" == "$1" ]]; then
         _edit "${path_file}"
+
+        cd $PPWD
         return 0
     fi
 
@@ -55,29 +57,16 @@ ${NORMAL}"
 
     echo "START BODY FN : ${FNN}() $*"
 
-    local cnx_in_sd=${HOME}/REPOBARE/_repo/ubique/.d/.mul/rbld_readme.mul/.in_cnx
-    local ufl9_sh=
-
-    for sd in $(_dd2e ${cnx_in_sd}); do
-        ufl9_sh=${cnx_in_sd}/${sd}/res.md_ufl9
-        [ -f "${ufl9_sh}" ] && {
-            echo -e "${HLIGHT}--- . ${ufl9_sh} ---${NORMAL}"
-            . "${ufl9_sh}"
-        }
-    done
-
-    . ${HOME}/REPOBARE/_repo/ubique/.d/.mul/rbld_readme.mul/.prc/README.md_ufl9
-
-    # rm {path_to_repo}/README.md
-    # cp README.md {path_to_repo}/README.md
-    _edit ${HOME}/REPOBARE/_repo/ubique/.d/.mul/rbld_readme.mul/.prc/README.md
-
     #{{body_fn}}
 
-    #! END BODY FN ---------------------------------------
+ufl_stl0 9 ${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.cnx ${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.prc/README.md 2
 
+
+    #! END BODY FN ---------------------------------------
+    
+    cd $PPWD
     return 0
 
 }
 
-rbld_readme_rnd7_3d6253b "$@"
+README_rnd7_85de09d "$@"
