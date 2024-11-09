@@ -49,7 +49,7 @@ ${NORMAL}"
     # fi
 
     # local _ARGS_=("$@")
-    # _parr3e _ARGS_
+    # _parr3e _ARGS_ 
 
     #{{ptr_path}}
 
@@ -59,11 +59,10 @@ ${NORMAL}"
 
     #{{body_fn}}
 
-ufl_stl0 9 ${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.cnx ${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.prc/README.md 2
-
+    ufl_stl0 9 ${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.cnx ${REPO_PATH}/ubique/.d/.mul/rbld_readme.mul/.prc/README.md 2
 
     #! END BODY FN ---------------------------------------
-    
+
     cd $PPWD
     return 0
 
